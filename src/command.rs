@@ -10,6 +10,8 @@ BASE_OFFSET: The offset of the first byte of the data field
 pub trait Command {
     fn base_offset(&self) -> usize;
 
+    fn from_raw(raw: &[u8], report_id: u8, base_offset: usize) -> Self;
+
     fn id(&self) -> CommandId;
 
     fn set_id(&mut self, id: CommandId);
@@ -28,7 +30,7 @@ pub trait Command {
 
     fn checksum(&self) -> u8;
 
-    fn set_checksum(&mut self, checksum: u8);
+    fn set_checksum(&mut self);
 
-    fn as_bytes(&mut self) -> &[u8];
+    fn as_bytes(&self) -> &[u8];
 }
