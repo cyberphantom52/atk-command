@@ -10,6 +10,9 @@ BASE_OFFSET: The offset of the first byte of the data field
 pub trait Command {
     fn base_offset(&self) -> usize;
 
+    // Convinience method to set a byte at a given offset along with its complement
+    fn set_byte_pair(&mut self, value: u8, offset: usize) -> Result<(), &'static str>;
+
     fn id(&self) -> CommandId;
 
     fn set_id(&mut self, id: CommandId);
